@@ -3,45 +3,59 @@
 /* -- COURSE COMPONENT -------------------------------------- */
 
 var count = 0;
+var myBtn = 'btn btn-secondary mr-3 py-2 px-3 text-uppercase font-weight-bold';
+
+/**
+ * The long & wonky way, re-render the app every time
+ * the count altering functions are executed.
+ */
 
 var addOne = function addOne() {
-    console.log('addOne');
+    count++;
+    renderCounterApp();
 };
 var minusOne = function minusOne() {
-    console.log('minusOne');
+    if (count > 0) count--;
+    renderCounterApp();
 };
 var reset = function reset() {
-    console.log('reset');
+    count = 0;
+    renderCounterApp();
 };
-
-var tmplCounter = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        'Count: ',
-        count
-    ),
-    React.createElement(
-        'button',
-        { onClick: addOne },
-        '+1'
-    ),
-    React.createElement(
-        'button',
-        { onClick: minusOne },
-        '-1'
-    ),
-    React.createElement(
-        'button',
-        { onClick: reset },
-        'reset'
-    )
-);
 
 /* -- RENDER -------------------------------------- */
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(tmplCounter, appRoot);
+var renderCounterApp = function renderCounterApp() {
+
+    var tmplCounter = React.createElement(
+        'div',
+        { className: 'container mt-5' },
+        React.createElement(
+            'h1',
+            null,
+            'Count: ',
+            count
+        ),
+        React.createElement(
+            'button',
+            { className: myBtn, onClick: addOne },
+            '+'
+        ),
+        React.createElement(
+            'button',
+            { className: myBtn, onClick: minusOne },
+            '-'
+        ),
+        React.createElement(
+            'button',
+            { className: myBtn, onClick: reset },
+            'reset'
+        )
+    );
+
+    ReactDOM.render(tmplCounter, appRoot);
+};
+
+renderCounterApp();
