@@ -1,61 +1,76 @@
 'use strict';
 
-/* -- COURSE COMPONENT -------------------------------------- */
-
-var count = 0;
-var myBtn = 'btn btn-secondary mr-3 py-2 px-3 text-uppercase font-weight-bold';
-
-/**
- * The long & wonky way, re-render the app every time
- * the count altering functions are executed.
- */
-
-var addOne = function addOne() {
-    count++;
-    renderCounterApp();
-};
-var minusOne = function minusOne() {
-    if (count > 0) count--;
-    renderCounterApp();
-};
-var reset = function reset() {
-    count = 0;
-    renderCounterApp();
+// app vars
+var app = {
+    title: 'What Should I Do?',
+    subtitle: 'Put your life in the hands of a computer',
+    options: []
 };
 
-/* -- RENDER -------------------------------------- */
+// add option to array
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+    var option = e.target.elements.option.value;
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        renderApp();
+    }
+};
+
+// wipe all options & re-render
+var clearOptions = function clearOptions() {
+    app.options = [];
+    renderApp();
+};
 
 var appRoot = document.getElementById('app');
 
-var renderCounterApp = function renderCounterApp() {
-
-    var tmplCounter = React.createElement(
+/**
+ * dynamic render function
+ * to be called whenever a change is made to the app vars
+ */
+var renderApp = function renderApp() {
+    var tmpl = React.createElement(
         'div',
         { className: 'container mt-5' },
         React.createElement(
-            'h1',
-            null,
-            'Count: ',
-            count
-        ),
-        React.createElement(
-            'button',
-            { className: myBtn, onClick: addOne },
-            '+'
-        ),
-        React.createElement(
-            'button',
-            { className: myBtn, onClick: minusOne },
-            '-'
-        ),
-        React.createElement(
-            'button',
-            { className: myBtn, onClick: reset },
-            'reset'
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement(
+                'h1',
+                null,
+                app.title
+            ),
+            React.createElement(
+                'p',
+                null,
+                app.options.length > 0 ? 'Here are your options...' : 'No options at this time'
+            ),
+            React.createElement(
+                'button',
+                { className: 'btn btn-secondary btn-sm', onClick: clearOptions },
+                'Remove All'
+            ),
+            React.createElement(
+                'p',
+                { className: 'mt-3' },
+                'Number of options: ',
+                React.createElement(
+                    'strong',
+                    null,
+                    app.options.length
+                )
+            ),
+            React.createElement('input', { type: 'text', name: 'option', className: 'py-1 px-2' }),
+            React.createElement(
+                'button',
+                { className: 'btn btn-primary ml-3' },
+                'Add Option'
+            )
         )
     );
-
-    ReactDOM.render(tmplCounter, appRoot);
+    ReactDOM.render(tmpl, appRoot);
 };
 
-renderCounterApp();
+renderApp();
