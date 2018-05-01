@@ -26,6 +26,8 @@ var clearOptions = function clearOptions() {
 
 var appRoot = document.getElementById('app');
 
+var numbers = [55, 101, 1000];
+
 /**
  * dynamic render function
  * to be called whenever a change is made to the app vars
@@ -61,6 +63,20 @@ var renderApp = function renderApp() {
                     null,
                     app.options.length
                 )
+            ),
+            React.createElement(
+                'ol',
+                null,
+
+                // loop through options, mapping each
+                // to a jsx expression
+                app.options.map(function (opt) {
+                    return React.createElement(
+                        'li',
+                        { key: opt },
+                        opt
+                    );
+                })
             ),
             React.createElement('input', { type: 'text', name: 'option', className: 'py-1 px-2' }),
             React.createElement(
