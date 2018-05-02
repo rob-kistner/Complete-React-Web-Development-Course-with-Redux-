@@ -1,38 +1,45 @@
 "use strict";
 
-// app vars
-var appData = {
-  visible: false
-};
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var toggleVisible = function toggleVisible() {
-  appData.visible = !appData.visible;
-  renderApp();
-};
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var appRoot = document.querySelector('#app');
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-var renderApp = function renderApp() {
-  var template = React.createElement(
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Header = function (_React$Component) {
+    _inherits(Header, _React$Component);
+
+    function Header() {
+        _classCallCheck(this, Header);
+
+        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
+    }
+
+    _createClass(Header, [{
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "p",
+                null,
+                "from the Header component"
+            );
+        }
+    }]);
+
+    return Header;
+}(React.Component);
+
+var jsx = React.createElement(
     "div",
     { className: "container mt-5" },
     React.createElement(
-      "h1",
-      { className: "mb-5" },
-      "Visibility Toggle"
+        "p",
+        null,
+        "JSX content here"
     ),
-    React.createElement(
-      "button",
-      { className: "btn btn-secondary btn-small border-0", onClick: toggleVisible },
-      appData.visible ? 'Hide It' : 'Show It'
-    ),
-    React.createElement(
-      "p",
-      { className: "my-3" },
-      appData.visible ? 'This is the section to show and hide' : ''
-    )
-  );
-  ReactDOM.render(template, appRoot);
-};
+    React.createElement(Header, null)
+);
 
-renderApp();
+ReactDOM.render(jsx, document.getElementById('app'));
