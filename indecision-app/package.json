@@ -5,7 +5,7 @@
   "author": "Rob Kistner",
   "license": "MIT",
   "scripts": {
-    "babel": "babel ./src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    "start": "babel ./src/app.js --out-file=public/scripts/app.js --presets=env,react --watch"
   },
   "dependencies": {
     "babel-preset-env": "1.5.2",

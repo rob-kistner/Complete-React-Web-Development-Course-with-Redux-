@@ -6,7 +6,7 @@ const app = {
 };
 
 // add option to array
-const onFormSubmit = e => {
+const onFormSubmit = (e) => {
     e.preventDefault();
     const option = e.target.elements.option.value;
     if(option) {
@@ -22,9 +22,14 @@ const clearOptions = () => {
     renderApp();
 };
 
-const appRoot = document.getElementById('app');
+// pulls random option listed in the app's options array
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    console.log(option);
+};
 
-const numbers = [55, 101, 1000];
+const appRoot = document.getElementById('app');
 
 /**
  * dynamic render function
@@ -37,32 +42,11 @@ const renderApp = () => {
             <form onSubmit={onFormSubmit}>
                 <h1>{app.title}</h1>
                 <p>{app.options.length > 0 ? 'Here are your options...' : 'No options at this time'}</p>
-                <button className="btn btn-secondary btn-sm" onClick={clearOptions}>Remove All</button>
                 
-                {
-                    // examples of display array contents...
-                    /*
-                    // will display everything except the last 3
-                    [99, 98, 97, 'Rob Kistner', null, undefined, true]
-
-                    // will render each of the jsx expressions
-                    // note: this will also throw the 'key prop' warning
-                    // for arrays if you don't have it
-                    [
-                        <p key="1">a</p>, 
-                        <p key="2">b</p>, 
-                        <p key="3">c</p>
-                    ]
-
-                    // map each value to a jsx expression
-                    numbers.map(number => {
-                        return <p key={number}>Number: {number}</p>;
-                    })
-                    */
-                }
+                <button disabled={app.options.length === 0} className="btn btn-secondary btn-sm mx-2" onClick={onMakeDecision}>What should I do?</button>
+                <button className="btn btn-secondary btn-sm mx-2" onClick={clearOptions}>Remove All</button>
                 
-                <p className="mt-3">Number of options: <strong>{app.options.length}</strong></p>
-                <ol>
+                <ol className="mt-3">
                     {
                         // loop through options, mapping each
                         // to a jsx expression

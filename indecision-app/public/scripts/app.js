@@ -24,9 +24,14 @@ var clearOptions = function clearOptions() {
     renderApp();
 };
 
-var appRoot = document.getElementById('app');
+// pulls random option listed in the app's options array
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
+    console.log(option);
+};
 
-var numbers = [55, 101, 1000];
+var appRoot = document.getElementById('app');
 
 /**
  * dynamic render function
@@ -51,22 +56,17 @@ var renderApp = function renderApp() {
             ),
             React.createElement(
                 'button',
-                { className: 'btn btn-secondary btn-sm', onClick: clearOptions },
+                { disabled: app.options.length === 0, className: 'btn btn-secondary btn-sm mx-2', onClick: onMakeDecision },
+                'What should I do?'
+            ),
+            React.createElement(
+                'button',
+                { className: 'btn btn-secondary btn-sm mx-2', onClick: clearOptions },
                 'Remove All'
             ),
             React.createElement(
-                'p',
-                { className: 'mt-3' },
-                'Number of options: ',
-                React.createElement(
-                    'strong',
-                    null,
-                    app.options.length
-                )
-            ),
-            React.createElement(
                 'ol',
-                null,
+                { className: 'mt-3' },
 
                 // loop through options, mapping each
                 // to a jsx expression
