@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -19,49 +19,78 @@ var Counter = function (_React$Component) {
     _this.handleAddOne = _this.handleAddOne.bind(_this);
     _this.handleMinusOne = _this.handleMinusOne.bind(_this);
     _this.handleReset = _this.handleReset.bind(_this);
+
+    // initialize state to handle tracked data
+    _this.state = {
+      name: 'Julie',
+      count: 0
+    };
     return _this;
   }
 
   _createClass(Counter, [{
-    key: "handleAddOne",
+    key: 'handleAddOne',
     value: function handleAddOne() {
-      console.log("handleAddOne called");
+      /**
+       * setState is used to update state, you can't
+       * just affect the object directly and have it 
+       * re-render
+       * 
+       * the prevState object is passed in by default, so 
+       * you can specify it and use it
+       * 
+       * you'll return an object setting any of the various state
+       * values to update
+       */
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count + 1
+        };
+      });
     }
   }, {
-    key: "handleMinusOne",
+    key: 'handleMinusOne',
     value: function handleMinusOne() {
-      console.log("handleMinusOne called");
+      this.setState(function (prevState) {
+        return {
+          count: prevState.count > 0 ? prevState.count - 1 : prevState.count
+        };
+      });
     }
   }, {
-    key: "handleReset",
+    key: 'handleReset',
     value: function handleReset() {
-      console.log("handleReset called");
+      // don't care about prevState for this one
+      this.setState(function () {
+        return { count: 0 };
+      });
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
-        { className: "container mt-5" },
+        'div',
+        { className: 'container mt-5' },
         React.createElement(
-          "h1",
+          'h1',
           null,
-          "Count: "
+          'Count: ',
+          this.state.count
         ),
         React.createElement(
-          "button",
+          'button',
           { onClick: this.handleAddOne },
-          "+"
+          '+'
         ),
         React.createElement(
-          "button",
+          'button',
           { onClick: this.handleMinusOne },
-          "-"
+          '-'
         ),
         React.createElement(
-          "button",
+          'button',
           { onClick: this.handleReset },
-          "reset"
+          'reset'
         )
       );
     }
