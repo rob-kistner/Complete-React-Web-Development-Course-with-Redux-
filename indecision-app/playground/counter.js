@@ -6,25 +6,12 @@ class Counter extends React.Component
     this.handleMinusOne = this.handleMinusOne.bind(this);
     this.handleReset = this.handleReset.bind(this);
 
-    // initialize state to handle tracked data
     this.state = {
-      name: 'Julie',
       count: 0
     }
   }
 
   handleAddOne() {
-    /**
-     * setState is used to update state, you can't
-     * just affect the object directly and have it 
-     * re-render
-     * 
-     * the prevState object is passed in by default, so 
-     * you can specify it and use it
-     * 
-     * you'll return an object setting any of the various state
-     * values to update
-     */
     this.setState( prevState => {
       return {
         count: prevState.count + 1
@@ -41,8 +28,19 @@ class Counter extends React.Component
   }
   
   handleReset() {
-    // don't care about prevState for this one
     this.setState( () => { return { count: 0 } });
+
+    /**
+     * Older method, just pass in an object with the set.
+     * Only problem is setState operates asynchronously and
+     * that could be an issue if the handler calls is again
+     * before the state change actually occurs. This is 
+     * solved by just using the explicit function instead.
+     */
+    
+    // this.setState( { count: 0 } );
+
+    // using functions instead will run setState calls synchronously
   }
 
   render() {
