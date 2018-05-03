@@ -1,29 +1,10 @@
+// button styles
 const btn = {
     Primary : 'btn btn-primary my-3',
     PrimarySm : 'btn btn-primary btn-small my-3',
     Secondary : 'btn btn-secondary my-3',
     SecondarySm : 'btn btn-outline-secondary my-3',
 }
-
-/**
- * bind exercise
- * 
- * illustrating how 'this' gets lost in scope
- */
-/*
- const obj = {
-    name: 'Vikram',
-    getName() {
-        return this.name;
-    }
-};
-
-binding object to reinstate 'this'
-const getName = obj.getName.bind(obj);
-// will set name to something else
-//const getName = obj.getName.bind({name: 'RobK'});
-console.log(getName());
-*/
 
 class IndecisionApp extends React.Component
 {
@@ -50,6 +31,7 @@ class Header extends React.Component
             <div>
                 <h1>{this.props.title}</h1>
                 <p>{this.props.subtitle}</p>
+                <hr />
             </div>
         );
     }
@@ -65,7 +47,7 @@ class Action extends React.Component
         return (
             <div>
                 <button
-                    className={btn.Primary}
+                    className={`${btn.Primary} w-100 py-2`}
                     onClick={this.handlePick}>
                     What should I do?
                 </button>
@@ -76,16 +58,6 @@ class Action extends React.Component
 
 class Options extends React.Component
 {
-    /**
-     * constructor always gets the props when called
-     * 
-     * Here we're using it to make sure handleRemoveAll 
-     * gets correct binding wherever it's called.
-     * This also allows it to be bound once when the
-     * object is instantiated rather than re-binding 
-     * it every time by using bind(this) on the onClick
-     * function call, for example
-     */
     constructor(props) {
         super(props);
         this.handleRemoveAll = this.handleRemoveAll.bind(this);

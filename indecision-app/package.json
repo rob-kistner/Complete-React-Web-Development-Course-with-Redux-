@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "babel ./src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "buildit": "babel ./playground/3-21-buildit.js --out-file=public/scripts/app.js --presets=env,react --watch"
+    "buildit": "babel ./playground/counter.js --out-file=public/scripts/app.js --presets=env,react --watch"
   },
   "dependencies": {
     "babel-preset-env": "1.5.2",
