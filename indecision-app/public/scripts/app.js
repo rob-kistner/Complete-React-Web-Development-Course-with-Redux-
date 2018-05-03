@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -8,93 +8,57 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Counter = function (_React$Component) {
-  _inherits(Counter, _React$Component);
+var ToggleVisibility = function (_React$Component) {
+  _inherits(ToggleVisibility, _React$Component);
 
-  function Counter(props) {
-    _classCallCheck(this, Counter);
+  function ToggleVisibility(props) {
+    _classCallCheck(this, ToggleVisibility);
 
-    var _this = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ToggleVisibility.__proto__ || Object.getPrototypeOf(ToggleVisibility)).call(this, props));
 
-    _this.handleAddOne = _this.handleAddOne.bind(_this);
-    _this.handleMinusOne = _this.handleMinusOne.bind(_this);
-    _this.handleReset = _this.handleReset.bind(_this);
+    _this.toggleVisibility = _this.toggleVisibility.bind(_this);
 
     _this.state = {
-      count: 0
+      visibility: false
     };
     return _this;
   }
 
-  _createClass(Counter, [{
-    key: "handleAddOne",
-    value: function handleAddOne() {
+  _createClass(ToggleVisibility, [{
+    key: 'toggleVisibility',
+    value: function toggleVisibility() {
       this.setState(function (prevState) {
         return {
-          count: prevState.count + 1
+          visibility: !prevState.visibility
         };
       });
     }
   }, {
-    key: "handleMinusOne",
-    value: function handleMinusOne() {
-      this.setState(function (prevState) {
-        return {
-          count: prevState.count > 0 ? prevState.count - 1 : prevState.count
-        };
-      });
-    }
-  }, {
-    key: "handleReset",
-    value: function handleReset() {
-      this.setState(function () {
-        return { count: 0 };
-      });
-
-      /**
-       * Older method, just pass in an object with the set.
-       * Only problem is setState operates asynchronously and
-       * that could be an issue if the handler calls is again
-       * before the state change actually occurs. This is 
-       * solved by just using the explicit function instead.
-       */
-
-      // this.setState( { count: 0 } );
-
-      // using functions instead will run setState calls synchronously
-    }
-  }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
-        { className: "container mt-5" },
+        'div',
+        { className: 'container mt-5' },
         React.createElement(
-          "h1",
+          'h1',
           null,
-          "Count: ",
-          this.state.count
+          'Visibility Toggle'
         ),
         React.createElement(
-          "button",
-          { onClick: this.handleAddOne },
-          "+"
+          'button',
+          { onClick: this.toggleVisibility },
+          this.state.visibility ? 'Hide details' : 'Show details'
         ),
-        React.createElement(
-          "button",
-          { onClick: this.handleMinusOne },
-          "-"
-        ),
-        React.createElement(
-          "button",
-          { onClick: this.handleReset },
-          "reset"
+        this.state.visibility && React.createElement(
+          'p',
+          null,
+          'Text that will get shown or hidden dependent on state'
         )
       );
     }
   }]);
 
-  return Counter;
+  return ToggleVisibility;
 }(React.Component);
 
-ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
+ReactDOM.render(React.createElement(ToggleVisibility, null), document.getElementById('app'));

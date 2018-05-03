@@ -40,7 +40,10 @@ class Counter extends React.Component
     
     // this.setState( { count: 0 } );
 
-    // using functions instead will run setState calls synchronously
+    /** using functions instead will run setState calls synchronously
+     *  React will actually combine the update functions together as 
+     *  needed in order to affect the state as intended.
+     */
   }
 
   render() {
