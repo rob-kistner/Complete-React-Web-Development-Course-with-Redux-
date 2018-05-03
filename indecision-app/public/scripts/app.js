@@ -13,8 +13,28 @@ var btn = {
     PrimarySm: 'btn btn-primary btn-small my-3',
     Secondary: 'btn btn-secondary my-3',
     SecondarySm: 'btn btn-outline-secondary my-3'
-};
 
+    /**
+     * bind exercise
+     * 
+     * illustrating how 'this' gets lost in scope
+     */
+    /*
+     const obj = {
+        name: 'Vikram',
+        getName() {
+            return this.name;
+        }
+    };
+    
+    binding object to reinstate 'this'
+    const getName = obj.getName.bind(obj);
+    // will set name to something else
+    //const getName = obj.getName.bind({name: 'RobK'});
+    console.log(getName());
+    */
+
+};
 var IndecisionApp = function (_React$Component) {
     _inherits(IndecisionApp, _React$Component);
 
@@ -114,20 +134,34 @@ var Action = function (_React$Component3) {
 var Options = function (_React$Component4) {
     _inherits(Options, _React$Component4);
 
-    function Options() {
+    /**
+     * constructor always gets the props when called
+     * 
+     * Here we're using it to make sure handleRemoveAll 
+     * gets correct binding wherever it's called.
+     * This also allows it to be bound once when the
+     * object is instantiated rather than re-binding 
+     * it every time by using bind(this) on the onClick
+     * function call, for example
+     */
+    function Options(props) {
         _classCallCheck(this, Options);
 
-        return _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).apply(this, arguments));
+        var _this4 = _possibleConstructorReturn(this, (Options.__proto__ || Object.getPrototypeOf(Options)).call(this, props));
+
+        _this4.handleRemoveAll = _this4.handleRemoveAll.bind(_this4);
+        return _this4;
     }
 
     _createClass(Options, [{
         key: 'handleRemoveAll',
         value: function handleRemoveAll() {
-            console.log('Removing all options...');
+            console.log(this.props.options);
         }
     }, {
         key: 'render',
         value: function render() {
+            // binding 
             return React.createElement(
                 'div',
                 null,

@@ -5,6 +5,25 @@ const btn = {
     SecondarySm : 'btn btn-outline-secondary my-3',
 }
 
+/**
+ * bind exercise
+ * 
+ * illustrating how 'this' gets lost in scope
+ */
+/*
+ const obj = {
+    name: 'Vikram',
+    getName() {
+        return this.name;
+    }
+};
+
+binding object to reinstate 'this'
+const getName = obj.getName.bind(obj);
+// will set name to something else
+//const getName = obj.getName.bind({name: 'RobK'});
+console.log(getName());
+*/
 
 class IndecisionApp extends React.Component
 {
@@ -57,11 +76,27 @@ class Action extends React.Component
 
 class Options extends React.Component
 {
+    /**
+     * constructor always gets the props when called
+     * 
+     * Here we're using it to make sure handleRemoveAll 
+     * gets correct binding wherever it's called.
+     * This also allows it to be bound once when the
+     * object is instantiated rather than re-binding 
+     * it every time by using bind(this) on the onClick
+     * function call, for example
+     */
+    constructor(props) {
+        super(props);
+        this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    }
+
     handleRemoveAll() {
-        console.log('Removing all options...');
+        console.log(this.props.options);
     }
 
     render() {
+        // binding 
         return (
             <div>
                 <p><strong>{this.props.options.length}</strong> options&hellip;</p>
