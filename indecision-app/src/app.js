@@ -8,16 +8,63 @@ const btn = {
 
 class IndecisionApp extends React.Component
 {
+    constructor(props) {
+        super(props);
+
+        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
+        this.handlePick = this.handlePick.bind(this);
+
+        this.state = {
+            title: 'Indecision',
+            subtitle: 'Because decisions are greatly overrated',
+            options: ['Thing one', 'Thing two', 'Thing three']
+        }
+    }
+
+    /**
+     * handlePick()
+     * 
+     * is a function acting as a prop
+     * 
+     * gets passed down to Action called under
+     * onClick={this.props.handlePick}
+     * 
+     * in order to work properly, gets bind(this) above in constructor
+     */
+    handlePick() {
+        const randomNum = Math.floor(Math.random() * this.state.options.length);
+        const option = this.state.options[randomNum];
+        console.log(option);
+    }
+
+    /**
+     * handleDeleteOptions()
+     * 
+     * is a function acting as state
+     * 
+     * gets passed down to Options as prop called under
+     * handleDeleteOptions={this.handleDeleteOptions}
+     * 
+     * in order to work properly, gets bind(this) above in constructor
+     */
+    handleDeleteOptions() {
+        this.setState( () => {
+            return {
+                options: []
+            }
+        })
+    }
+
     render() {
-        const title = 'InDecision';
-        const subtitle = 'Because decisions are greatly overrated';
-        const options = ['Thing one', 'Thing two', 'Thing four'];
-        // const options = [];
         return (
             <div className="container mt-5">
-                <Header title={title} subtitle={subtitle} />
-                <Action />
-                <Options options={options} />
+                <Header title={this.state.title} subtitle={this.state.subtitle} />
+                <Action
+                    hasOptions={this.state.options.length > 0}
+                    handlePick={this.handlePick} />
+                <Options
+                    options={this.state.options}
+                    handleDeleteOptions={this.handleDeleteOptions} />
                 <AddOption />
             </div>
         );
@@ -39,16 +86,14 @@ class Header extends React.Component
 
 class Action extends React.Component
 {
-    handlePick() {
-        console.log('handlePick');
-    }
-
     render() {
         return (
             <div>
                 <button
                     className={`${btn.Primary} w-100 py-2`}
-                    onClick={this.handlePick}>
+                    onClick={this.props.handlePick}
+                    disabled={!this.props.hasOptions}
+                >
                     What should I do?
                 </button>
             </div>
@@ -58,17 +103,13 @@ class Action extends React.Component
 
 class Options extends React.Component
 {
-    constructor(props) {
-        super(props);
-        this.handleRemoveAll = this.handleRemoveAll.bind(this);
-    }
-
-    handleRemoveAll() {
-        console.log(this.props.options);
-    }
-
+    /**
+     * the handleDeleteOptions state function
+     * is passed into this component as props
+     * and can be utilized just like state 
+     * variable props
+     */
     render() {
-        // binding 
         return (
             <div>
                 <p><strong>{this.props.options.length}</strong> options&hellip;</p>
@@ -79,7 +120,7 @@ class Options extends React.Component
                 }
                 <button
                     className={btn.SecondarySm}
-                    onClick={this.handleRemoveAll}>
+                    onClick={this.props.handleDeleteOptions}>
                     Remove All
                 </button>
             </div>
