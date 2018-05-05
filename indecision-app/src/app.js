@@ -6,6 +6,7 @@ const btn = {
     SecondarySm : 'btn btn-outline-secondary my-3',
 }
 
+
 class IndecisionApp extends React.Component
 {
     constructor(props) {
@@ -28,13 +29,6 @@ class IndecisionApp extends React.Component
         console.log(option);
     }
 
-    /**
-     * Passed up from child
-     * 
-     * uses Array.concat()
-     * 
-     * @ param option 
-     */
     handleAddOption(option) {
 
         // error handling
@@ -81,72 +75,66 @@ class IndecisionApp extends React.Component
     }
 }
 
-class Header extends React.Component
-{
-    render() {
-        return(
-            <div>
-                <h1>{this.props.title}</h1>
-                <p>{this.props.subtitle}</p>
-                <hr />
-            </div>
-        );
-    }
+/**
+ * converted to stateless functional component
+ */
+const Header = props => {
+    return(
+        <div>
+            <h1>{props.title}</h1>
+            <p className="lead">{props.subtitle}</p>
+            <hr />
+        </div>
+    );
 }
 
-class Action extends React.Component
-{
-    render() {
+/**
+ * converted to stateless functional component
+ */
+const Action = props => {
         return (
             <div>
                 <button
                     className={`${btn.Primary} w-100 py-2`}
-                    onClick={this.props.handlePick}
-                    disabled={!this.props.hasOptions}
+                    onClick={props.handlePick}
+                    disabled={!props.hasOptions}
                 >
                     What should I do?
                 </button>
             </div>
         );
-    }
 }
 
-class Options extends React.Component
-{
-    /**
-     * the handleDeleteOptions state function
-     * is passed into this component as props
-     * and can be utilized just like state 
-     * variable props
-     */
-    render() {
-        return (
-            <div>
-                <p><strong>{this.props.options.length}</strong> options&hellip;</p>
-                {
-                    this.props.options.map(option => {
-                        return <Option key={option} optionText={option}  />
-                    })
-                }
-                <button
-                    className={btn.SecondarySm}
-                    onClick={this.props.handleDeleteOptions}>
-                    Remove All
-                </button>
-            </div>
-        );
-    }
+/**
+ * converted to stateless functional component
+ */
+const Options = props => {
+    return (
+        <div>
+            <p><strong>{props.options.length}</strong> options&hellip;</p>
+            {
+                props.options.map(option => {
+                    return <Option key={option} optionText={option}  />
+                })
+            }
+            <button
+                className={btn.SecondarySm}
+                onClick={props.handleDeleteOptions}>
+                Remove All
+            </button>
+        </div>
+    );
 }
 
-class Option extends React.Component
-{
-    render() {
-        return (
-            <div>
-                <p>{this.props.optionText}</p>
-            </div>
-        );
-    }
+/**
+ * converted to stateless functional component
+ */
+const Option = props => {
+    return (
+        <div>
+            <p>{props.optionText}</p>
+        </div>
+    );
 }
 
 class AddOption extends React.Component
@@ -196,6 +184,27 @@ class AddOption extends React.Component
         );
     }
 }
+
+/**
+ * Stateless Functional Component
+ * 
+ * Only concerned about display without exchanging 
+ * data, etc.
+ * 
+ * props is an object with any
+ * passed in properties from the call
+ */
+
+/*
+ const User = (props) => {
+    return (
+        <div>
+            <p>Name: {props.name}</p>
+            <p>Age: {props.age}</p>
+        </div>
+    )
+};
+*/
 
 ReactDOM.render(
     <IndecisionApp />, 
