@@ -17,9 +17,7 @@ class IndecisionApp extends React.Component
         this.handleAddOption = this.handleAddOption.bind(this);
 
         this.state = {
-            title: 'Indecision',
-            subtitle: 'Because decisions are greatly overrated',
-            options: []
+            options: props.options
         }
     }
 
@@ -40,8 +38,6 @@ class IndecisionApp extends React.Component
 
         this.setState((prevState) => {
             return {
-                // js array function concat the option 
-                // to the current state array
                 options: prevState.options.concat(option)
             };
         });
@@ -58,7 +54,7 @@ class IndecisionApp extends React.Component
     render() {
         return (
             <div className="container mt-5">
-                <Header title={this.state.title} subtitle={this.state.subtitle} />
+                <Header />
                 <Action
                     hasOptions={this.state.options.length > 0}
                     handlePick={this.handlePick}
@@ -75,22 +71,31 @@ class IndecisionApp extends React.Component
     }
 }
 
-/**
- * converted to stateless functional component
- */
+IndecisionApp.defaultProps = {
+    options: []
+};
+
 const Header = props => {
     return(
         <div>
             <h1>{props.title}</h1>
-            <p className="lead">{props.subtitle}</p>
+            {props.subtitle && <p className="lead">{props.subtitle}</p>}
             <hr />
         </div>
     );
 }
 
 /**
- * converted to stateless functional component
+ * default props
+ * 
+ * Will either use the default value in the spec'd object if
+ * the prop isn't passed at all
+ * 
  */
+Header.defaultProps = {
+    title: 'Indecision Default Title'
+};
+
 const Action = props => {
         return (
             <div>
@@ -105,9 +110,6 @@ const Action = props => {
         );
 }
 
-/**
- * converted to stateless functional component
- */
 const Options = props => {
     return (
         <div>
@@ -126,9 +128,6 @@ const Options = props => {
     );
 }
 
-/**
- * converted to stateless functional component
- */
 const Option = props => {
     return (
         <div>
@@ -185,28 +184,7 @@ class AddOption extends React.Component
     }
 }
 
-/**
- * Stateless Functional Component
- * 
- * Only concerned about display without exchanging 
- * data, etc.
- * 
- * props is an object with any
- * passed in properties from the call
- */
-
-/*
- const User = (props) => {
-    return (
-        <div>
-            <p>Name: {props.name}</p>
-            <p>Age: {props.age}</p>
-        </div>
-    )
-};
-*/
-
 ReactDOM.render(
-    <IndecisionApp />, 
+    <IndecisionApp options={['Devil\'s Den', 'Second District']} />, 
     document.getElementById('app')
 );
