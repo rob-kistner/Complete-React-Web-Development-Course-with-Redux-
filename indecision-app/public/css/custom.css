@@ -120,3 +120,7 @@ button, .button {
 .d-block {
   display: block;
 }
+
+.border-0 {
+  border: 0;
+}

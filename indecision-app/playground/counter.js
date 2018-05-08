@@ -7,7 +7,22 @@ class Counter extends React.Component
     this.handleReset = this.handleReset.bind(this);
 
     this.state = {
-      count: props.count
+      count: 0
+    }
+  }
+
+  componentDidMount() {
+    const ls = localStorage.getItem('count');
+    const count = parseInt(ls, 10);
+    if(!isNaN(count)) {
+      this.setState( () => ( { count } ) );
+    }
+
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.count !== this.state.count) {
+      localStorage.setItem('count', this.state.count);
     }
   }
 
@@ -35,19 +50,21 @@ class Counter extends React.Component
     return (
       <div className="container mt-5">
         <h1>Count: {this.state.count}</h1>
-        <button onClick={this.handleAddOne}>+</button>
-        <button onClick={this.handleMinusOne}>-</button>
-        <button onClick={this.handleReset}>reset</button>
+        <button onClick={this.handleAddOne} className="mr-2 border-0">
+          <h4 className="m-0">+</h4>
+        </button>
+        <button onClick={this.handleMinusOne} className="mr-2 border-0">
+          <h4 className="m-0">-</h4>
+        </button>
+        <button onClick={this.handleReset}>
+          Reset
+        </button>
       </div>
     );
   }
 }
 
-Counter.defaultProps = {
-  count: 0
-};
-
 ReactDOM.render(
-  <Counter count={1000} />,
+  <Counter />,
   document.getElementById('app')
 );
