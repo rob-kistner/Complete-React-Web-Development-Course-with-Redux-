@@ -13,16 +13,28 @@ class IndecisionApp extends React.Component
         }
     }
 
+    /**
+     * get options out of local storage
+     * (if there are any)
+     */
     componentDidMount() {
-        console.log('Fetching Data');
+        // test for valid json data
+        try {
+            const json = localStorage.getItem('options');
+            const options = JSON.parse(json);
+            if(options) {
+                this.setState( () => ({ options: options }) );
+            }
+        } catch(e) {
+            // otherwise do nothing
+        }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Saving Data');
-        console.log('prevProps:');
-        console.table(prevProps);
-        console.log('prevState:');
-        console.table(prevState);
+        if(prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem('options', json);
+        }
     }
 
     componentWillUnmount() {
@@ -141,13 +153,14 @@ const Options = props => {
                     ))
                 }
             </div>
+            {props.options.length === 0 && <p><em>Please add an option to get started</em></p>}
             <button
                 onClick={props.handleDeleteOptions}
                 className="mx-auto"
                 >
                 <p className="m-0">
-                <X />
-                <span className="ml-3">Remove All</span>
+                    <X />
+                    <span className="ml-3">Remove All</span>
                 </p>
             </button>
         </div>
@@ -168,6 +181,7 @@ const Option = props => {
                     >
                     <X />
                 </button>
+
             </p>
         </div>
     );
@@ -192,7 +206,10 @@ class AddOption extends React.Component
 
         this.setState(() => ( { error: error } ));
 
-        e.target.elements.option.value = '';
+        // clear input field
+        if(!error) {
+            e.target.elements.option.value = '';
+        }
     }
 
     render() {

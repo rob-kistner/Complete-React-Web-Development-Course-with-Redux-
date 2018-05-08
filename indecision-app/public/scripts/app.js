@@ -26,19 +26,35 @@ var IndecisionApp = function (_React$Component) {
         return _this;
     }
 
+    /**
+     * get options out of local storage
+     * (if there are any)
+     */
+
+
     _createClass(IndecisionApp, [{
         key: 'componentDidMount',
         value: function componentDidMount() {
-            console.log('Fetching Data');
+            // test for valid json data
+            try {
+                var json = localStorage.getItem('options');
+                var options = JSON.parse(json);
+                if (options) {
+                    this.setState(function () {
+                        return { options: options };
+                    });
+                }
+            } catch (e) {
+                // otherwise do nothing
+            }
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
-            console.log('Saving Data');
-            console.log('prevProps:');
-            console.table(prevProps);
-            console.log('prevState:');
-            console.table(prevState);
+            if (prevState.options.length !== this.state.options.length) {
+                var json = JSON.stringify(this.state.options);
+                localStorage.setItem('options', json);
+            }
         }
     }, {
         key: 'componentWillUnmount',
@@ -185,6 +201,15 @@ var Options = function Options(props) {
                 });
             })
         ),
+        props.options.length === 0 && React.createElement(
+            'p',
+            null,
+            React.createElement(
+                'em',
+                null,
+                'Please add an option to get started'
+            )
+        ),
         React.createElement(
             'button',
             {
@@ -255,7 +280,10 @@ var AddOption = function (_React$Component2) {
                 return { error: error };
             });
 
-            e.target.elements.option.value = '';
+            // clear input field
+            if (!error) {
+                e.target.elements.option.value = '';
+            }
         }
     }, {
         key: 'render',
