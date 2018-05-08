@@ -1,0 +1,23 @@
+<svg viewBox="0 0 34 34">
+  <defs>
+    <style>
+      .cls-1 {
+        fill:none;
+        stroke:#231f20;
+        stroke-miterlimit:10;
+        stroke-width:2px;
+        }
+      .cls-2{
+        fill:#231f20;
+      }
+    </style>
+  </defs>
+  <title>ques-mark</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <circle class="cls-1" cx="17" cy="17" r="16"/>
+      <circle class="cls-2" cx="17" cy="25.94" r="3"/>
+      <path class="cls-1" d="M11.83,12.63A5.17,5.17,0,1,1,17,17.8v3.66"/>
+    </g>
+  </g>
+</svg>
