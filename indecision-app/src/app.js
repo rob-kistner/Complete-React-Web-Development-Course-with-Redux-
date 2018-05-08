@@ -13,6 +13,22 @@ class IndecisionApp extends React.Component
         }
     }
 
+    componentDidMount() {
+        console.log('Fetching Data');
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        console.log('Saving Data');
+        console.log('prevProps:');
+        console.table(prevProps);
+        console.log('prevState:');
+        console.table(prevState);
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
+
     handlePick() {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
@@ -47,8 +63,8 @@ class IndecisionApp extends React.Component
         return (
             <div className="container">
                 <Header
-                    // title="Anthology Horror Movies"
-                    // subtitle="As covered on WatchMojo's Top 10 Anthology Horror Movies"
+                    title="Anthology Horror Movies"
+                    subtitle="As covered on WatchMojo's Top 10 Anthology Horror Movies"
                     />
                 <Action
                     hasOptions={this.state.options.length > 0}
@@ -74,38 +90,42 @@ IndecisionApp.defaultProps = {
 const Header = props => {
     return(
         <div>
-            <h1>{props.title}</h1>
+            <h2>{props.title}</h2>
             {props.subtitle && <p>{props.subtitle}</p>}
             <hr />
         </div>
     );
 }
 
-/**
- * default props
- * 
- * Will either use the default value in the spec'd object if
- * the prop isn't passed at all
- * 
- */
 Header.defaultProps = {
     title: 'Default Title',
     subtitle: ''
 };
 
 const Action = props => {
-        return (
-            <div>
-                <button
-                    className="button-primary u-full-width h-auto mb-5"
-                    onClick={props.handlePick}
-                    disabled={!props.hasOptions}
-                >
-                    <h5 className="py-3 mb-0 letter-spacing-1">What should I do?</h5>
-                </button>
-            </div>
-        );
-}
+    return (
+        <div>
+            <button
+                className="button-primary u-full-width h-auto mb-5"
+                onClick={props.handlePick}
+                disabled={!props.hasOptions}
+            >
+                <h5 className="py-3 mb-0 letter-spacing-1">
+                    What should I do ?
+                </h5>
+            </button>
+        </div>
+    );
+};
+
+const X = props => {
+    return (
+        <svg height="25" width="15" className={props.classes} style={{position: 'relative', top: '12px'}}>
+            <line x1="0" y1="0" x2="15" y2="15" style={{stroke: '#000', strokeWidth: 2}} />
+            <line x1="15" y1="0" x2="0" y2="15" style={{stroke: '#000', strokeWidth: 2}} />
+        </svg>
+    );
+};
 
 const Options = props => {
     return (
@@ -122,8 +142,13 @@ const Options = props => {
                 }
             </div>
             <button
-                onClick={props.handleDeleteOptions}>
-                Remove All
+                onClick={props.handleDeleteOptions}
+                className="mx-auto"
+                >
+                <p className="m-0">
+                <X />
+                <span className="ml-3">Remove All</span>
+                </p>
             </button>
         </div>
     );
@@ -132,12 +157,18 @@ const Options = props => {
 const Option = props => {
     return (
         <div>
-            <p>{props.optionText}</p>
-            <button 
-                onClick={e => {
-                    props.handleDeleteOption(props.optionText);
-                }}
-            >X</button>
+            <p>
+                {props.optionText}
+                <button 
+                    className='u-pull-right'
+                    style={{border: 0}}
+                    onClick={e => {
+                        props.handleDeleteOption(props.optionText);
+                    }}
+                    >
+                    <X />
+                </button>
+            </p>
         </div>
     );
 }
@@ -168,7 +199,10 @@ class AddOption extends React.Component
         return (
             <div>
                 {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.handleAddOption}>
+                <form
+                    onSubmit={this.handleAddOption}
+                    className="mt-5"
+                    >
                     <input
                         type="text"
                         placeholder="Enter an option"

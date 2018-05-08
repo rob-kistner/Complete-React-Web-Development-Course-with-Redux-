@@ -27,6 +27,25 @@ var IndecisionApp = function (_React$Component) {
     }
 
     _createClass(IndecisionApp, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            console.log('Fetching Data');
+        }
+    }, {
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            console.log('Saving Data');
+            console.log('prevProps:');
+            console.table(prevProps);
+            console.log('prevState:');
+            console.table(prevState);
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            console.log('componentWillUnmount');
+        }
+    }, {
         key: 'handlePick',
         value: function handlePick() {
             var randomNum = Math.floor(Math.random() * this.state.options.length);
@@ -72,10 +91,10 @@ var IndecisionApp = function (_React$Component) {
             return React.createElement(
                 'div',
                 { className: 'container' },
-                React.createElement(Header
-                // title="Anthology Horror Movies"
-                // subtitle="As covered on WatchMojo's Top 10 Anthology Horror Movies"
-                , null),
+                React.createElement(Header, {
+                    title: 'Anthology Horror Movies',
+                    subtitle: 'As covered on WatchMojo\'s Top 10 Anthology Horror Movies'
+                }),
                 React.createElement(Action, {
                     hasOptions: this.state.options.length > 0,
                     handlePick: this.handlePick
@@ -104,7 +123,7 @@ var Header = function Header(props) {
         'div',
         null,
         React.createElement(
-            'h1',
+            'h2',
             null,
             props.title
         ),
@@ -117,13 +136,6 @@ var Header = function Header(props) {
     );
 };
 
-/**
- * default props
- * 
- * Will either use the default value in the spec'd object if
- * the prop isn't passed at all
- * 
- */
 Header.defaultProps = {
     title: 'Default Title',
     subtitle: ''
@@ -143,9 +155,18 @@ var Action = function Action(props) {
             React.createElement(
                 'h5',
                 { className: 'py-3 mb-0 letter-spacing-1' },
-                'What should I do?'
+                'What should I do ?'
             )
         )
+    );
+};
+
+var X = function X(props) {
+    return React.createElement(
+        'svg',
+        { height: '25', width: '15', className: props.classes, style: { position: 'relative', top: '12px' } },
+        React.createElement('line', { x1: '0', y1: '0', x2: '15', y2: '15', style: { stroke: '#000', strokeWidth: 2 } }),
+        React.createElement('line', { x1: '15', y1: '0', x2: '0', y2: '15', style: { stroke: '#000', strokeWidth: 2 } })
     );
 };
 
@@ -167,8 +188,19 @@ var Options = function Options(props) {
         React.createElement(
             'button',
             {
-                onClick: props.handleDeleteOptions },
-            'Remove All'
+                onClick: props.handleDeleteOptions,
+                className: 'mx-auto'
+            },
+            React.createElement(
+                'p',
+                { className: 'm-0' },
+                React.createElement(X, null),
+                React.createElement(
+                    'span',
+                    { className: 'ml-3' },
+                    'Remove All'
+                )
+            )
         )
     );
 };
@@ -180,16 +212,18 @@ var Option = function Option(props) {
         React.createElement(
             'p',
             null,
-            props.optionText
-        ),
-        React.createElement(
-            'button',
-            {
-                onClick: function onClick(e) {
-                    props.handleDeleteOption(props.optionText);
-                }
-            },
-            'X'
+            props.optionText,
+            React.createElement(
+                'button',
+                {
+                    className: 'u-pull-right',
+                    style: { border: 0 },
+                    onClick: function onClick(e) {
+                        props.handleDeleteOption(props.optionText);
+                    }
+                },
+                React.createElement(X, null)
+            )
         )
     );
 };
@@ -236,7 +270,10 @@ var AddOption = function (_React$Component2) {
                 ),
                 React.createElement(
                     'form',
-                    { onSubmit: this.handleAddOption },
+                    {
+                        onSubmit: this.handleAddOption,
+                        className: 'mt-5'
+                    },
                     React.createElement('input', {
                         type: 'text',
                         placeholder: 'Enter an option',
