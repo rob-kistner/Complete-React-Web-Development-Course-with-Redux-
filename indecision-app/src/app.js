@@ -1,3 +1,5 @@
+// get add function from add.js in the utils folder
+// add(2,4)
 
 class IndecisionApp extends React.Component
 {
