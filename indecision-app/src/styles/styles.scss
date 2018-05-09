@@ -1,0 +1,13 @@
+$brand-color: #666;
+$font-body: 'Helvetica Neue', HelveticaNeue, Arial, sans-serif;
+$font-weight-body: 400;
+$font-weight-headers: 500;
+
+body {
+  font-family: $font-body;
+  font-weight: $font-weight-body;
+  color: $brand-color;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-weight: $font-weight-headers;
+}
