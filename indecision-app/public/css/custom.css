@@ -1,4 +1,11 @@
 /*
+  vars
+*/
+:root {
+  --primary: #33C3F0;
+}
+
+/*
   SKELETON redefs
 */
 button, .button {
@@ -6,6 +13,12 @@ button, .button {
   min-height: 24px;
   padding: 0.25rem 1rem;
   margin-bottom: 0;
+}
+
+/* react-modal styling */
+.Overlay {
+  background: var(--primary);
+  opacity: 20%;
 }
 
 /* -------------------------------
@@ -123,4 +136,12 @@ button, .button {
 
 .border-0 {
   border: 0;
+}
+
+.text-center { text-align: center; }
+.text-left   { text-align: left;   }
+.text-right  { text-align: right;  }
+
+.text-primary {
+  color: var(--primary);
 }

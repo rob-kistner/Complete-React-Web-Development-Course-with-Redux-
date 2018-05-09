@@ -4,30 +4,35 @@ import Header from './Header';
 import Action from './Action';
 import Options from './Options';
 import AddOption from './AddOption';
+import OptionModal from './OptionModal';
 
-/**
- * class methods no longer requires 
- * explicit binding due to:
- * 
- * babel-plugin-transform-class-properties
- * 
- * that means you can just 
- * get rid of the constructor
- */
 
 class IndecisionApp extends React.Component
 {
 
   state = {
-    options: [],
     title: this.props.title,
-    subtitle: this.props.subtitle
+    subtitle: this.props.subtitle,
+    options: [],
+    selectedOption: undefined
   }
 
+  /**
+   * Pick methods
+   * 
+   * Attached to "What Should I Do?" button.
+   * Randomly selects one of the options and
+   * shows a modal window with the data from
+   * the option.
+   */
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
-    console.log(option);
+    this.setState( () => ({ selectedOption: option }) );
+  }
+
+  handleClearPick = () => {
+    this.setState( () => ({ selectedOption: undefined }) );
   }
 
   handleAddOption = (option) => {
@@ -93,6 +98,10 @@ class IndecisionApp extends React.Component
           />
         <AddOption
           handleAddOption={this.handleAddOption}
+          />
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          handleClearPick={this.handleClearPick}
           />
       </div>
     );
