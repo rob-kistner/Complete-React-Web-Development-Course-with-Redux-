@@ -5,10 +5,9 @@
   "author": "Rob Kistner",
   "license": "MIT",
   "scripts": {
-    "babel:dev": "babel ./src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
-    "babel:buildit": "babel ./playground/counter.js --out-file=public/scripts/app.js --presets=env,react --watch",
     "serve": "live-server public",
-    "dev": "webpack --watch"
+    "build": "webpack",
+    "dev": "webpack-dev-server --hot --inline"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -20,6 +19,7 @@
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "validator": "8.0.0",
-    "webpack": "3.1.0"
+    "webpack": "3.1.0",
+    "webpack-dev-server": "2.5.1"
   }
 }
