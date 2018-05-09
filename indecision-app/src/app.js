@@ -3,42 +3,34 @@ import ReactDOM from 'react-dom';
 
 import IndecisionApp from './components/IndecisionApp';
 
-ReactDOM.render(
-  <IndecisionApp title='Ornette Coleman Albums' />, 
-  document.getElementById('app')
+/**
+ * example of children nested into component
+ */
+const Layout = (props) => {
+  return (
+    <div>
+      <p>Header</p>
+      {props.children}
+      <p>Footer</p>
+    </div>
+  );
+}
+
+const template = (
+  <div>
+    <h1>Template Section</h1>
+    <p>This is my page</p>
+  </div>
 );
 
 /**
- * 
- * side examples illustrating new and old syntax
- * using babel-plugin-transform-class-properties
- * binding features
- * 
+ * shows use of children in render function
  */
-class OldSyntax {
-  constructor() {
-    this.name = 'Mike';
-    // old syntax, needs to bind this
-    this.getGreeting = this.getGreeting.bind(this);
-  }
-  getGreeting() {
-    return `Hi, my name is ${this.name}`;
-  }
-}
-const oldSyntax = new OldSyntax();
-const getGreeting = oldSyntax.getGreeting;
-console.log(getGreeting());
-
-/* ------------------------------------------ */
-
-class NewSyntax {
-  name = 'RobK';
-  // new syntax, can just use an arrow function
-  // since this is bound by the plugin
-  getGreeting = () => {
-    return `Hi, my name is ${this.name}`;
-  }
-}
-const newSyntax = new NewSyntax();
-const newGetGreeting = newSyntax.getGreeting;
-console.log(newGetGreeting());
+ReactDOM.render(
+  (
+    <Layout>
+      {template}
+    </Layout>
+  ),
+  document.getElementById('app')
+);
