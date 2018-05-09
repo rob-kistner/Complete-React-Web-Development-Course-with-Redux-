@@ -1,10 +1,16 @@
-import validator from 'validator';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const jsx = <p>This is JSX from Webpack!</p>;
+import IndecisionApp from './components/IndecisionApp';
 
 ReactDOM.render(
-  jsx,
+  <IndecisionApp
+    title='Ornette Coleman Albums'
+    options={[
+      'The Twilight Zone', 
+      'Asylum',
+      'Black Sabbath'
+    ]} 
+    />, 
   document.getElementById('app')
 );
