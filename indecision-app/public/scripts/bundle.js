@@ -1589,26 +1589,32 @@ module.exports = getActiveElement;
 
 /***/ }),
 /* 31 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_validator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_validator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom__ = __webpack_require__(83);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom__);
 
 
+var _validator = __webpack_require__(32);
 
+var _validator2 = _interopRequireDefault(_validator);
 
-const tmpl = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('p', {}, 'Testing 123');
+var _react = __webpack_require__(11);
 
-__WEBPACK_IMPORTED_MODULE_2_react_dom___default.a.render(
-  tmpl,
-  document.getElementById('app')
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(83);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var jsx = _react2.default.createElement(
+  'p',
+  null,
+  'This is JSX from Webpack!'
 );
+
+_reactDom2.default.render(jsx, document.getElementById('app'));
 
 /***/ }),
 /* 32 */

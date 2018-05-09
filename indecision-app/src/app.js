@@ -2,9 +2,9 @@ import validator from 'validator';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const tmpl = React.createElement('p', {}, 'Testing 123');
+const jsx = <p>This is JSX from Webpack!</p>;
 
 ReactDOM.render(
-  tmpl,
+  jsx,
   document.getElementById('app')
 );
