@@ -1,16 +1,10 @@
-// import './utils.js';
-// import renamedSubtract, { square, add } from './utils.js';
+import validator from 'validator';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// console.log('app.js is running dontcha know');
-// console.log(square(4));
-// console.log(add(50,8));
-// console.log(renamedSubtract(100,80));
+const tmpl = React.createElement('p', {}, 'Testing 123');
 
-
-import isSenior, { isAdult, canDrink } from './person.js';
-
-let RobKAge = 19;
-
-console.log(isAdult(RobKAge));
-console.log(canDrink(RobKAge));
-console.log(isSenior(RobKAge));
+ReactDOM.render(
+  tmpl,
+  document.getElementById('app')
+);
