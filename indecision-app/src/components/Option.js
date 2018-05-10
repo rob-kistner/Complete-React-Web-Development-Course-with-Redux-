@@ -4,19 +4,17 @@ import X from './X';
 
 
 const Option = (props) => (
-  <div>
-    <p>
-      {props.optionText}
-      <button 
-        className='u-pull-right'
-        style={{border: 0}}
-        onClick={e => {
-          props.handleDeleteOption(props.optionText);
-        }}
-        >
-        <X />
-      </button>
-    </p>
+  <div className="option">
+    <p className="option__text">{props.count}. {props.optionText}</p>
+    <button 
+      className='btn btn--link'
+      style={{border: 0}}
+      onClick={e => {
+        props.handleDeleteOption(props.optionText);
+      }}
+      >
+      <X />
+    </button>
   </div>
 );
 

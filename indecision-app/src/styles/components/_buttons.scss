@@ -1,0 +1,48 @@
+
+.big-button {
+  background: $purple;
+  border: none;
+  border-bottom: 0.6rem solid darken($purple, 10%);
+  color: #fff;
+  padding: $md*1.4;
+  border-radius: 6px;
+  font-size: $lg;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: $lg;
+  transition: all 0.2s;
+  outline: none;
+
+  &:hover {
+    background-color: darken($purple, 10%);
+    border-bottom-color: darken($purple, 20%);
+    text-shadow: 0 0 $sm rgba(255,255,255,0.5);
+    box-shadow: 0 0 $lg rgba(0,0,0,0.35);
+    transition: all 0.2s;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.btn {
+  background: $purple;
+  border: none;
+  border-bottom: 0.3rem solid darken($purple, 10%);
+  color: #fff;
+  font-weight: 500;
+  padding: $sm ($sm * 1.4);
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+}
+
+.btn--link {
+  background: none;
+  border: none;
+  color: $offwhite;
+  padding: 0;
+}

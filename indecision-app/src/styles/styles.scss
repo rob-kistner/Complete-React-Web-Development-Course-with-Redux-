@@ -1,13 +1,11 @@
-$brand-color: #666;
-$font-body: 'Helvetica Neue', HelveticaNeue, Arial, sans-serif;
-$font-weight-body: 400;
-$font-weight-headers: 500;
+@import './base/settings';
+@import './base/base';
+@import './base/utilities';
+@import './base/grid';
 
-body {
-  font-family: $font-body;
-  font-weight: $font-weight-body;
-  color: $brand-color;
-}
-h1,h2,h3,h4,h5,h6 {
-  font-weight: $font-weight-headers;
-}
+@import './components/header';
+@import './components/buttons';
+@import './components/widget';
+@import './components/options';
+@import './components/addoption';
+@import './components/modal';
