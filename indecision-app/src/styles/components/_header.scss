@@ -1,12 +1,12 @@
 .header {
   background: $offblack;
   color: #fff;
-  margin-bottom: 4.8rem;
-  padding: $lg 0;
+  margin-bottom: $md*1.5;
+  padding: $md*1.2 0;
 }
 
 .header__title {
-  font-size: $base-size * 2;
+  font-size: $lg*0.8;
   margin: 0 0 1rem;
   text-transform: uppercase;
 }
@@ -15,4 +15,15 @@
   font-size: $base-size;
   font-weight: 400;
   margin: 0;
+}
+
+// desktop
+@media(min-width: $desktop) {
+  .header {
+    margin-bottom: 4.8rem;
+    padding: $xl 0;
+  }
+  .header__title {
+    font-size: $lg;
+  }
 }

@@ -7,6 +7,7 @@
 
 .add-option {
   display: flex;
+  flex-direction: column;
   padding: $md;
 }
 
@@ -17,8 +18,19 @@
   border-bottom: 0.3rem solid darken($darkblue, 10%);
   border-right: 0.15rem solid darken($darkblue, 10%);
   padding: $sm;
-  margin-right: $sm;
+  margin: 0 0 $sm 0;
   box-shadow: inset 0 0 $md rgba(0,0,0,0.35);
   color: $offwhite;
   outline: none;
+}
+
+
+// desktop
+@media(min-width: $desktop) {
+  .add-option {
+    flex-direction: row;
+  }
+  .add-option__input {
+    margin: 0 $sm 0 0;
+  }
 }

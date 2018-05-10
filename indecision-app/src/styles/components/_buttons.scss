@@ -2,15 +2,15 @@
 .big-button {
   background: $purple;
   border: none;
-  border-bottom: 0.6rem solid darken($purple, 10%);
+  border-bottom: 0.4rem solid darken($purple, 10%);
   color: #fff;
-  padding: $md*1.4;
+  padding: $md*1.2;
   border-radius: 6px;
-  font-size: $lg;
+  font-size: $lg*0.8;
   font-weight: bold;
   cursor: pointer;
   width: 100%;
-  margin-bottom: $lg;
+  margin-bottom: $md*1.5;
   transition: all 0.2s;
   outline: none;
 
@@ -45,4 +45,15 @@
   border: none;
   color: $offwhite;
   padding: 0;
+}
+
+
+// desktop
+@media(min-width: $desktop) {
+  .big-button {
+    border-bottom-width: 0.6rem;
+    padding: $md*1.4;
+    font-size: $lg;
+    margin-bottom: $lg;
+  }
 }
