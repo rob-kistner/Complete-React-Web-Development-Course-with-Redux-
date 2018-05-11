@@ -1,0 +1,23 @@
+.nav {
+  list-style-type: none;
+  display: block;
+  padding: 0;
+  margin-bottom: $lg;
+
+  & li {
+    display: inline;
+  }
+
+  & li > a {
+    text-decoration: none;
+    padding: $sm;
+    &:hover {
+      color: $link-hover;
+    }
+  }
+
+}
+
+.is-active {
+  border-bottom: solid 2px $link-hover;
+}

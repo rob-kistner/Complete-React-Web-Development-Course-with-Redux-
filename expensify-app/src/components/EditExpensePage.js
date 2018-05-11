@@ -1,11 +1,13 @@
 import React from 'react';
 
 
-const EditExpensePage = () => {
+const EditExpensePage = (props) => {
+  console.log(props);
   return (
     <div>
-    <h1>EDIT EXPENSE</h1>
-    <p>This is where you'd go to EDIT a specific expense</p>
+      <h1>EDIT EXPENSE</h1>
+      {/* dyanmic route parameter passed into props */}
+      <p>Editing item {props.match.params.id}</p>
     </div>
   );
 }
