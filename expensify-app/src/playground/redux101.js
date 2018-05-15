@@ -1,20 +1,49 @@
 import React, {Component} from 'react';
 import { createStore } from 'redux';
 
+/**
+ * Action generators - functions that return action objects
+ * 
+ * destructuring payload parameters with a default value,
+ * must be initialized to empty object literal
+ * 
+ */
 
+const incrementCount = ({ incrementBy = 3 } = {}) => ({
+  type: 'INCREMENT',
+  incrementBy: incrementBy
+});
+
+const decrementCount = ({ decrementBy = 1 } = {}) => ({
+  type: 'DECREMENT',
+  decrementBy: decrementBy
+});
+
+// forcing user to set the count
+const setCount = ({ count } = {}) => ({
+  type: 'SET',
+  count
+});
+
+const resetCount = () => ({
+  type: 'RESET',
+});
+
+
+/**
+ * the store
+ */
 const store = createStore( ( state = { count: 0 }, action ) => {
   switch(action.type) {
 
     case 'INCREMENT':
-      const incrementBy = (typeof action.incrementBy === 'number') ? action.incrementBy : 1;
       return {
-        count: state.count + incrementBy
+        count: state.count + action.incrementBy
       }
 
     case 'DECREMENT':
-    const decrementBy = (typeof action.decrementBy === 'number') ? action.decrementBy : 1;
       return {
-        count: state.count - decrementBy
+        count: state.count - action.decrementBy
       }
       
     case 'SET':
@@ -22,7 +51,7 @@ const store = createStore( ( state = { count: 0 }, action ) => {
         count: action.count
       }
 
-      case 'RESET':
+    case 'RESET':
       return {
         count: 0
       }
@@ -43,32 +72,21 @@ const unsubscribe = store.subscribe(()=>{
 });
 
 
-store.dispatch({
-  type: 'INCREMENT',
-  incrementBy: 5
-});
+// simplified calls to set store values using 
+// the generators above
+store.dispatch(incrementCount({ incrementBy: 5 }));
 
-store.dispatch({
-  type: 'INCREMENT'
-});
+store.dispatch(incrementCount());
 
-store.dispatch({
-  type: 'DECREMENT',
-  decrementBy: 10
-});
+store.dispatch(decrementCount());
 
-store.dispatch({
-  type: 'DECREMENT'
-});
+store.dispatch(decrementCount({ decrementBy: 10 }));
 
-store.dispatch({
-  type: 'RESET'
-});
+store.dispatch(setCount({ count: 101 }));
 
-store.dispatch({
-  type: 'SET',
-  count: 101
-})
+store.dispatch(resetCount());
+
+
 
 // remove subscription now!
-unsubscribe();
+// unsubscribe();
