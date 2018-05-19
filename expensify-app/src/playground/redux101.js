@@ -29,11 +29,18 @@ const resetCount = () => ({
   type: 'RESET',
 });
 
-
 /**
- * the store
+ * Reducers: rules
+ * ---------------------------------
+ * 1. Reducers are pure functions: the state and the action,
+ * nothing else should be passed in. They should also never 
+ * change anything outside of the reducer (state)
+ * 
+ * 2. Never change state or action
+ * They should just return an object representing the new state
+ * 
  */
-const store = createStore( ( state = { count: 0 }, action ) => {
+const countReducer = ( state = { count: 0 }, action ) => {
   switch(action.type) {
 
     case 'INCREMENT':
@@ -60,20 +67,18 @@ const store = createStore( ( state = { count: 0 }, action ) => {
       return state;
 
   }
-});
-
+};
 
 /**
- * called the subscription after attaching it to a variable,
- * in this case 'unsubscribe', will remove the subscription
+ * the store
  */
+const store = createStore( countReducer );
+
 const unsubscribe = store.subscribe(()=>{
   console.log(store.getState());
 });
 
 
-// simplified calls to set store values using 
-// the generators above
 store.dispatch(incrementCount({ incrementBy: 5 }));
 
 store.dispatch(incrementCount());
@@ -85,8 +90,3 @@ store.dispatch(decrementCount({ decrementBy: 10 }));
 store.dispatch(setCount({ count: 101 }));
 
 store.dispatch(resetCount());
-
-
-
-// remove subscription now!
-// unsubscribe();
