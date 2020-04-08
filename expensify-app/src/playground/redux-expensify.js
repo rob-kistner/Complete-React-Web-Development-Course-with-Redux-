@@ -160,6 +160,10 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 };
 // #endregion
 
+const getVisibleExpenses = (expenses, filters) => {
+  return expenses;
+}
+
 // #region ----- STORE creation
 /** 
  * using combineReducers for the expenses and filters
@@ -175,15 +179,17 @@ const store = createStore(
 
 // subscription
 store.subscribe( () => {
-  console.log( store.getState() );
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log( visibleExpenses );
 });
 
 /**
  * Dispatch testing
  */
 
-// const expense1 = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
-// const expense2 = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
+const expense1 = store.dispatch(addExpense({ description: 'Rent', amount: 100 }));
+const expense2 = store.dispatch(addExpense({ description: 'Coffee', amount: 300 }));
 
 // store.dispatch( removeExpense({ id: expense1.expense.id }) );
 
@@ -195,9 +201,9 @@ store.subscribe( () => {
 // store.dispatch( sortByAmount() ); // amount
 // store.dispatch( sortByDate() );   // date
 
-store.dispatch( setStartDate(125) );   // startDate to 125
-store.dispatch( setStartDate() );      // startDate to undefined
-store.dispatch( setEndDate(1250) );   // endDate to 1250
+// store.dispatch( setStartDate(125) );   // startDate to 125
+// store.dispatch( setStartDate() );      // startDate to undefined
+// store.dispatch( setEndDate(1250) );   // endDate to 1250
 
 
 // ----- TESTS -----
@@ -215,8 +221,8 @@ const user = {
 
 // age is being overriden in the log here, as long as it
 // occurs in order
-console.log({
-  ...user,
-  age: 27,
-  location: 'Philadelphia',
-});
+// console.log({
+//   ...user,
+//   age: 27,
+//   location: 'Philadelphia',
+// });
